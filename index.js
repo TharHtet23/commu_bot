@@ -3,7 +3,10 @@ import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 dotenv.config();
 
+console.log(process.env.TELEGRAM_TOKEN);
 const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
+
+
 
 bot.on('callback_query', (query) => {
   const chatId = query.message.chat.id;
@@ -15,13 +18,15 @@ bot.on('callback_query', (query) => {
 
 // Inline button to open the web app
 bot.onText(/\/start/, (msg) => {
-  const chatId = msg.chat.id;gi
+  const chatId = msg.chat.id;  // Remove the 'gi' here
 
   bot.sendMessage(chatId, 'Open the web app:', {
     reply_markup: {
       inline_keyboard: [
-        [{ text: 'Open Web App', web_app: { url: 'http://127.0.0.1:3000/' } }]
+        [{ text: 'Open Web App', web_app: { url: 'https://commuserver-production.up.railway.app/' } }]
       ]
     }
   });
 });
+
+
