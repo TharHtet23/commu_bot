@@ -29,4 +29,23 @@ bot.onText(/\/start/, (msg) => {
   });
 });
 
+// Handle web app data
+bot.on('web_app_data', (msg) => {
+  const chatId = msg.chat.id;
+  const data = msg.web_app_data.data;
+
+  console.log('Received data from web app:', data);
+
+  // Process the data here
+  // For example, you can parse it if it's JSON
+  try {
+    const parsedData = JSON.parse(data);
+    // Handle the parsed data
+    bot.sendMessage(chatId, `Received data: ${JSON.stringify(parsedData, null, 2)}`);
+  } catch (error) {
+    console.error('Error parsing data:', error);
+    bot.sendMessage(chatId, `Received raw data: ${data}`);
+  }
+});
+
 
